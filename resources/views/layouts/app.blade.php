@@ -21,7 +21,25 @@
             <li><a href="#">Services</a></li>
             <li><a href="#">Review</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="#" id="loginBtn" class="btn-login" onclick="openLoginModal(event)">Login</a>
+            @auth
+        <li style="display:flex; align-items:center; gap:.75rem;">
+            <!-- tampilkan nama (opsional) -->
+            <span style="font-weight:600;">{{ Auth::user()->name }}</span>
+
+            <!-- logout form: POST ke route('logout') -->
+            <form action="{{ route('logout') }}" method="POST" style="display:inline; margin:0;">
+                @csrf
+                <button type="submit" class="btn-login" style="padding:.4rem .9rem; border-radius:12px;">
+                    Logout
+                </button>
+            </form>
+        </li>
+    @else
+        <li>
+            <!-- tombol buka modal login (JS) atau fallback ke homepage -->
+            <a href="#" id="loginBtn" class="btn-login" onclick="openLoginModal(event)">Login</a>
+        </li>
+    @endauth
             </li>
         </ul>
 

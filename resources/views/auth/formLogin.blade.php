@@ -1,4 +1,13 @@
-<!-- resources/views/auth/_login_form.blade.php -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form id="login-form" method="POST" action="{{ route('login') }}">
     @csrf
 
