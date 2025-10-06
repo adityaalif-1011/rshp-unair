@@ -201,3 +201,45 @@
   font-size: 24px;
   cursor: pointer;
 }
+
+/* ===== Admin Dashboard ===== */
+.dashboard-title {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.dashboard-card {
+    border: none;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.dashboard-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+}
+
+.dashboard-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #34495e;
+}
+
+.dashboard-card .card-text {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.dashboard-card .btn {
+    border-radius: 20px;
+    font-size: 0.85rem;
+}

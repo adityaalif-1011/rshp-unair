@@ -37,7 +37,7 @@ class AdminController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('admin.users')->with('success', 'User berhasil ditambahkan');
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -61,13 +61,13 @@ class AdminController extends Controller
             'password' => $request->password ? bcrypt($request->password) : $user->password,
         ]);
 
-        return redirect()->route('admin.users')->with('success', 'User berhasil diperbarui');
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui');
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('admin.users')->with('success', 'User berhasil dihapus');
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus');
     }
 }
