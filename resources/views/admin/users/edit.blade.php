@@ -1,40 +1,65 @@
 @extends('layouts.app')
 
+@section('title', 'Edit User')
+
 @section('content')
 <div class="container">
-    <h2>Edit User</h2>
 
-    @if ($errors->any())
-      <div style="color:#b00020;">
-        <ul>@foreach($errors->all() as $err) <li>{{ $err }}</li> @endforeach</ul>
-      </div>
-    @endif
+    <div class="page-header">
+        <h1>Edit User: {{ $user->name }}</h1>
+        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
+            Batal & Kembali
+        </a>
+    </div>
 
-<form action="{{ route('admin.roles.update', $role->idrole) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <div class="card">
+        <div class="card-header">
+            <h3>Formulir Data Pengguna</h3>
+        </div>
+        <div class="card-body">
+            
+            @if ($errors->any())
+              <div class="alert alert-danger" style="background-color: #FEE2E2; color: #B91C1C; border-left-color: var(--danger-color);">
+                <strong>Whoops!</strong> Ada beberapa masalah dengan inputanmu.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+              </div>
+            @endif
 
-        <div>
-            <label>Nama</label><br>
-            <input type="text" name="name" value="{{ old('name', $user->name) }}" required>
-        </div>
-        <div>
-            <label>Email</label><br>
-            <input type="email" name="email" value="{{ old('email', $user->email) }}" required>
-        </div>
-        <div>
-            <label>Password (kosongkan jika tidak ingin ganti)</label><br>
-            <input type="password" name="password">
-        </div>
-        <div>
-            <label>Konfirmasi Password</label><br>
-            <input type="password" name="password_confirmation">
-        </div>
+            <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-        <div style="margin-top:8px;">
-            <button type="submit">Update</button>
-            <a href="{{ route('admin.users.index') }}">Batal</a>
+                <div class="form-group">
+                    <label for="name">Nama</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password Baru</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                    <small style="color: var(--text-muted); margin-top: 4px; display: block;">Kosongkan jika tidak ingin mengganti password.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password_confirmation">Konfirmasi Password Baru</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+                </div>
+
+                <div style="margin-top: 30px; display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="width: auto;">Update User</button>
+                    <a href="{{ route('admin.users.index') }}" class="btn btn-secondary" style="width: auto;">Batal</a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 @endsection

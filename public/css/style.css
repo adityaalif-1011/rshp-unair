@@ -243,3 +243,232 @@
     border-radius: 20px;
     font-size: 0.85rem;
 }
+
+/* manage role
+/* public/css/custom-style.css */
+
+/* --- Import Font & Variabel Warna --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #3B82F6; /* blue-500 */
+    --primary-hover: #2563EB; /* blue-600 */
+    --danger-color: #EF4444; /* red-500 */
+    --danger-hover: #DC2626; /* red-600 */
+    --success-color: #10B981; /* green-500 */
+    --bg-light: #F9FAFB; /* gray-50 */
+    --border-color: #E5E7EB; /* gray-200 */
+    --text-dark: #1F2937; /* gray-800 */
+    --text-muted: #6B7280; /* gray-500 */
+    --card-bg: #FFFFFF;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* --- Global Styles --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* --- Header Halaman --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* --- Card (Pembungkus Form & Tabel) --- */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    overflow: hidden; /* Agar border-radius rapi */
+}
+
+.card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 24px;
+}
+
+/* --- Form Styles --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 5fr 4fr 3fr;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #D1D5DB; /* gray-300 */
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* --- Button Styles --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: #FFFFFF;
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: var(--bg-light);
+}
+
+.btn-icon {
+    background: none;
+    padding: 6px;
+    border-radius: 50%;
+    width: auto;
+}
+.btn-icon.btn-danger:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+.btn-icon svg {
+    width: 18px;
+    height: 18px;
+    color: var(--danger-color);
+}
+
+
+/* --- Table Styles --- */
+.table-wrapper {
+    overflow-x: auto;
+}
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.data-table th, .data-table td {
+    padding: 12px 24px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+.data-table thead th {
+    background-color: var(--bg-light);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.data-table tbody tr:hover {
+    background-color: #F3F4F6; /* gray-100 */
+}
+.data-table .user-info .name {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+.data-table .user-info .email {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+.data-table .actions {
+    text-align: center;
+}
+.data-table .actions form {
+    display: inline-block;
+}
+
+/* --- Badge (Role) Styles --- */
+.badge {
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+    margin: 2px;
+}
+.badge-blue { background-color: #DBEAFE; color: #1E40AF; }
+.badge-green { background-color: #D1FAE5; color: #065F46; }
+.badge-yellow { background-color: #FEF3C7; color: #92400E; }
+.badge-purple { background-color: #E9D5FF; color: #5B21B6; }
+
+/* --- Alert Message --- */
+.alert {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.alert-success {
+    background-color: #D1FAE5;
+    color: #047857;
+    border-left: 5px solid var(--success-color);
+}
+.alert .close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: inherit;
+}

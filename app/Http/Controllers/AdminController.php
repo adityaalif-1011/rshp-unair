@@ -40,15 +40,15 @@ class AdminController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan');
     }
 
-    public function edit($id)
+    public function edit($user)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user);
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $user)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user);
 
         $request->validate([
             'name' => 'required',
@@ -64,9 +64,9 @@ class AdminController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui');
     }
 
-    public function destroy($id)
+    public function destroy($user)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user);
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus');
     }

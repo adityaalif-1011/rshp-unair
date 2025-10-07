@@ -3,98 +3,110 @@
 @section('title', 'Manage Roles')
 
 @section('content')
-<div class="max-w-7xl mx-auto mt-10 px-4">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Manajemen Role — Assign ke User</h2>
-        <a href="{{ route('admin.roles.index') }}" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">Kembali ke Roles</a>
+<div class="container">
+
+    <div class="page-header">
+        <h1>Manajemen Role User</h1>
+        <a href="{{ route('admin.roles.index') }}" class="btn btn-secondary" style="width: auto;">Kembali</a>
     </div>
 
-    <!-- Success Message -->
     @if(session('success'))
-        <div class="mb-4 p-4 bg-green-100 border border-green-300 rounded text-green-800">
-            {{ session('success') }}
+        <div class="alert alert-success" id="success-alert">
+            <span>{{ session('success') }}</span>
+            <button class="close-btn" onclick="document.getElementById('success-alert').style.display='none'">&times;</button>
         </div>
     @endif
 
-    <!-- Form Assign Role -->
-    <div class="mb-8 bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-        <form action="{{ route('admin.roles.assign') }}" method="POST" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
-            @csrf
-            <div class="md:col-span-5">
-                <label class="block mb-2 font-semibold text-gray-700">Pilih User</label>
-                <select name="user_id" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-                    <option value="">-- Pilih User --</option>
-                    @foreach($users as $u)
-                        <option value="{{ $u->id }}">{{ $u->id }} — {{ $u->name }} ({{ $u->email }})</option>
-                    @endforeach
-                </select>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>Assign Role ke User</h3>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('admin.roles.assign') }}" method="POST" class="form-grid">
+                @csrf
+                <div class="form-group">
+                    <label for="user_id">Pilih User</label>
+                    <select name="user_id" id="user_id" class="form-control" required>
+                        <option value="">-- Pilih User --</option>
+                        @foreach($users as $u)
+                            <option value="{{ $u->id }}">{{ $u->id }} — {{ $u->name }} ({{ $u->email }})</option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <div class="md:col-span-4">
-                <label class="block mb-2 font-semibold text-gray-700">Pilih Role</label>
-                <select name="role_id" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    <option value="">-- Pilih Role --</option>
-                    @foreach($roles as $role)
-                        <option value="{{ $role->idrole }}">{{ $role->nama_role }}</option>
-                    @endforeach
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="role_id">Pilih Role</label>
+                    <select name="role_id" id="role_id" class="form-control">
+                        <option value="">-- Pilih Role --</option>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->idrole }}">{{ $role->nama_role }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <div class="md:col-span-3">
-                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg shadow transition">Assign Role</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <button class="btn btn-primary">Assign Role</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <!-- Users Table -->
-    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200 border border-gray-300">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase border-b border-gray-300">ID User</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase border-b border-gray-300">Nama</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase border-b border-gray-300">Email</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase border-b border-gray-300">Role(s)</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase border-b border-gray-300">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($users as $u)
-                    <tr class="{{ $loop->even ? 'bg-gray-50' : 'bg-white' }} hover:bg-gray-100 border-b border-gray-200">
-                        <td class="px-6 py-3 text-sm text-gray-700">{{ $u->id }}</td>
-                        <td class="px-6 py-3 text-sm text-gray-700">{{ $u->name }}</td>
-                        <td class="px-6 py-3 text-sm text-gray-700">{{ $u->email }}</td>
-                        <td class="px-6 py-3 text-sm text-gray-700">
-                            @if($u->roles->isEmpty())
-                                <span class="text-gray-400 italic">— belum ada role —</span>
-                            @else
-                                @foreach($u->roles as $role)
-                                    <span class="inline-block px-2 py-1 text-xs rounded-lg font-medium {{ $role->id % 2 == 0 ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800' }} mr-1 mb-1 border border-gray-300">
+    <div class="card">
+        <div class="card-header">
+            <h3>Daftar User dan Role</h3>
+        </div>
+        <div class="table-wrapper">
+            @php
+                $badgeColors = ['badge-blue', 'badge-green', 'badge-yellow', 'badge-purple'];
+            @endphp
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Role(s)</th>
+                        <th class="actions">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($users as $user)
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    <div class="name">{{ $user->name }}</div>
+                                    <div class="email">{{ $user->email }}</div>
+                                </div>
+                            </td>
+                            <td>
+                                @forelse($user->roles as $role)
+                                    <span class="badge {{ $badgeColors[$loop->index % count($badgeColors)] }}">
                                         {{ $role->name }}
                                     </span>
+                                @empty
+                                    <span style="color: var(--text-muted); font-style: italic;">— Belum ada role —</span>
+                                @endforelse
+                            </td>
+                            <td class="actions">
+                                @foreach($user->roles as $role)
+                                    <form action="{{ route('admin.roles.assign.remove', ['user' => $user->id, 'role' => $role->id]) }}" method="POST" onsubmit="return confirm('Hapus role \'{{ $role->name }}\' dari \'{{ $user->name }}\'?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-icon btn-danger" title="Hapus role {{ $role->name }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.124-2.033-2.124H8.033c-1.12 0-2.033.944-2.033 2.124v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+                                        </button>
+                                    </form>
                                 @endforeach
-                            @endif
-                        </td>
-                        <td class="px-6 py-3 text-sm">
-                            @if($u->roles->isNotEmpty())
-                                <div class="flex flex-wrap gap-2">
-                                    @foreach($u->roles as $role)
-                                        <form action="{{ route('admin.roles.assign.remove', ['user' => $u->id, 'role' => $role->id]) }}" method="POST" onsubmit="return confirm('Hapus role {{ $role->name }} dari {{ $u->name }}?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="px-2 py-1 text-xs bg-red-500 hover:bg-red-600 text-white rounded-lg shadow border border-red-600 transition">Hapus {{ $role->name }}</button>
-                                        </form>
-                                    @endforeach
-                                </div>
-                            @else
-                                <span class="text-gray-400 italic">Tidak ada aksi</span>
-                            @endif
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                                Tidak ada data pengguna.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection

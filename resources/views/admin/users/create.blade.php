@@ -1,37 +1,63 @@
 @extends('layouts.app')
 
+@section('title', 'Tambah User Baru')
+
 @section('content')
 <div class="container">
-    <h2>Tambah User</h2>
 
-    @if ($errors->any())
-      <div style="color:#b00020;">
-        <ul>@foreach($errors->all() as $err) <li>{{ $err }}</li> @endforeach</ul>
-      </div>
-    @endif
+    <div class="page-header">
+        <h1>Tambah User Baru</h1>
+        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
+            Batal & Kembali
+        </a>
+    </div>
 
-    <form action="{{ route('admin.users.store') }}" method="POST">
-        @csrf
-        <div>
-            <label>Nama</label><br>
-            <input type="text" name="name" value="{{ old('name') }}" required>
+    <div class="card">
+        <div class="card-header">
+            <h3>Formulir Data Pengguna</h3>
         </div>
-        <div>
-            <label>Email</label><br>
-            <input type="email" name="email" value="{{ old('email') }}" required>
+        <div class="card-body">
+            
+            @if ($errors->any())
+              <div class="alert alert-danger" style="background-color: #FEE2E2; color: #B91C1C; border-left-color: var(--danger-color);">
+                <strong>Whoops!</strong> Ada beberapa masalah dengan inputanmu.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+              </div>
+            @endif
+
+            <form action="{{ route('admin.users.store') }}" method="POST">
+                @csrf
+
+                <div class="form-group">
+                    <label for="name">Nama</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password_confirmation">Konfirmasi Password</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="width: auto;">Simpan User</button>
+                    <a href="{{ route('admin.users.index') }}" class="btn btn-secondary" style="width: auto;">Batal</a>
+                </div>
+            </form>
         </div>
-        <div>
-            <label>Password</label><br>
-            <input type="password" name="password" required>
-        </div>
-        <div>
-            <label>Konfirmasi Password</label><br>
-            <input type="password" name="password_confirmation" required>
-        </div>
-        <div style="margin-top:8px;">
-            <button type="submit">Simpan</button>
-            <a href="{{ route('admin.users.index') }}">Batal</a>
-        </div>
-    </form>
+    </div>
 </div>
 @endsection
