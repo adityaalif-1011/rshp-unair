@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     // Manage User ↔ Role
     Route::get('/admin/roles/manage', [RoleController::class, 'manage'])->name('admin.roles.manage');
     Route::post('/admin/roles/assign', [RoleController::class, 'assign'])->name('admin.roles.assign');
-    Route::delete('/admin/roles/assign/{user}/{role}', [RoleController::class, 'remove'])->name('admin.roles.assign.remove');
-});
+// routes/web.php
+Route::delete('/admin/roles/assign/{userId}/{roleId}', [RoleController::class, 'remove'])
+    ->name('admin.roles.assign.remove');});
 

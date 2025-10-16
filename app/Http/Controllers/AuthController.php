@@ -41,7 +41,7 @@ class AuthController extends Controller
         return redirect()->intended('/')->with('success', 'Registrasi berhasil.');
     }
 
-    // proses login
+    // login
     public function login(Request $request)
 {
     $request->validate([

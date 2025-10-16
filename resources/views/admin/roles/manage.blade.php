@@ -63,7 +63,7 @@
                 <thead>
                     <tr>
                         <th>User</th>
-                        <th>Role(s)</th>
+                        <th>Role</th>
                         <th class="actions">Aksi</th>
                     </tr>
                 </thead>
@@ -87,7 +87,7 @@
                             </td>
                             <td class="actions">
                                 @foreach($user->roles as $role)
-                                    <form action="{{ route('admin.roles.assign.remove', ['user' => $user->id, 'role' => $role->id]) }}" method="POST" onsubmit="return confirm('Hapus role \'{{ $role->name }}\' dari \'{{ $user->name }}\'?')">
+                                    <form action="{{ route('admin.roles.assign.remove', ['userId' => $user->id, 'roleId' => $role->idrole]) }}" method="POST" onsubmit="return confirm('Hapus role \'{{ $role->nama_role }}\' dari \'{{ $user->nama }}\'?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-icon btn-danger" title="Hapus role {{ $role->name }}">
