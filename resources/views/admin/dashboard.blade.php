@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Manajemen Role</h5>
                     <p class="card-text">Atur role seperti Admin, Dokter, Perawat, Resepsionis.</p>
-                    <a href="{{route('admin.roles.manage')}}" class="btn btn-outline-secondary btn-sm mt-auto disabled">Kelola</a>
+                    <a href="{{route('admin.roles.manage')}}" class="btn btn-primary btn-sm mt-auto disabled">Kelola</a>
                 </div>
             </div>
         </div>

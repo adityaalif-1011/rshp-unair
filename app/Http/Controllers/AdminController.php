@@ -26,13 +26,13 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'nama' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
         ]);
 
         User::create([
-            'name' => $request->name,
+            'nama' => $request->nama,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
@@ -51,12 +51,12 @@ class AdminController extends Controller
         $user = User::findOrFail($user);
 
         $request->validate([
-            'name' => 'required',
+            'nama' => 'required',
             'email' => 'required|unique:users,email,' . $user->id,
         ]);
 
         $user->update([
-            'name' => $request->name,
+            'nama' => $request->nama,
             'email' => $request->email,
             'password' => $request->password ? bcrypt($request->password) : $user->password,
         ]);

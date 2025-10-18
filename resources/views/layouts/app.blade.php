@@ -16,7 +16,7 @@
             <span>RSHP UNAIR</span>
         </div>
         <ul class="menu">
-            <li><a href="#">Home</a></li>
+            <li><a href="http://127.0.0.1:8000/admin">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Review</a></li>

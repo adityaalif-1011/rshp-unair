@@ -6,7 +6,7 @@
 <div class="container">
 
     <div class="page-header">
-        <h1>Edit User: {{ $user->name }}</h1>
+        <h1>Edit User: {{ $user->nama }}</h1>
         <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
             Batal & Kembali
         </a>
@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <label for="name">Nama</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}" required>
+                    <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama', $user->nama) }}" required>
                 </div>
 
                 <div class="form-group">

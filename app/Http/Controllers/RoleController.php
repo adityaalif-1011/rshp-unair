@@ -8,26 +8,20 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Tampilkan daftar role (CRUD Role dasar).
-     */
+    //Daftar Role 
     public function index()
     {
         $roles = Role::orderBy('nama_role')->get();
         return view('admin.roles.index', compact('roles'));
     }
 
-    /**
-     * Form tambah role.
-     */
+    //Form tambah role.
     public function create()
     {
         return view('admin.roles.create');
     }
 
-    /**
-     * Simpan role baru.
-     */
+    //Simpan role baru.
     public function store(Request $request)
     {
         $request->validate(['nama_role' => 'required|unique:role,nama_role']);
@@ -35,18 +29,14 @@ class RoleController extends Controller
         return redirect()->route('admin.roles.index')->with('success', 'Role berhasil ditambahkan.');
     }
 
-    /**
-     * Form edit role.
-     */
+    //Form edit role.
     public function edit($idrole)
     {
         $role = Role::where('idrole', $idrole)->firstOrFail();
         return view('admin.roles.edit', compact('role'));
     }
 
-    /**
-     * Update role.
-     */
+    //Update role.
     public function update(Request $request, $idrole)
     {
         $role = Role::where('idrole', $idrole)->firstOrFail();
@@ -61,9 +51,7 @@ class RoleController extends Controller
             ->with('success', 'Role berhasil diupdate.');
     }
 
-    /**
-     * Hapus role.
-     */
+    //Hapus role.
     public function destroy($idrole)
     {
         $role = Role::where('idrole', $idrole)->firstOrFail();
@@ -78,9 +66,8 @@ class RoleController extends Controller
             ->with('success', 'Role berhasil dihapus.');
     }
 
-    /**
-     * Halaman manage: assign role ke user.
-     */
+    //Halaman manage: assign role ke user.
+
     public function manage()
     {
         $users = User::with('roles')->orderBy('id')->get(); 
